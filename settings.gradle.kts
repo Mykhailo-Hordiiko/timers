@@ -23,3 +23,4 @@ dependencyResolutionManagement {
 rootProject.name = "Timers"
 
 include(":app")
+include(":core")
