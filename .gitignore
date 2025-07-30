@@ -3,6 +3,8 @@
 /.gradle/
 
 /.idea/caches
+/.idea/dictionaries
+/.idea/inspectionProfiles
 /.idea/.name
 /.idea/assetWizardSettings.xml
 /.idea/compiler.xml
