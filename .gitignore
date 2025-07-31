@@ -16,6 +16,9 @@
 
 /.kotlin/
 /app/build/
+/feature/timers/build/
+/feature/statistics/build/
+/feature/settings/build/
 /core/build/
 /build/
 /local.properties

@@ -23,4 +23,11 @@ dependencyResolutionManagement {
 rootProject.name = "Timers"
 
 include(":app")
+include(":feature:timers")
+include(":feature:statistics")
+include(":feature:settings")
 include(":core")
+
+project(":feature:timers").projectDir = file("feature/timers")
+project(":feature:statistics").projectDir = file("feature/statistics")
+project(":feature:settings").projectDir = file("feature/settings")
