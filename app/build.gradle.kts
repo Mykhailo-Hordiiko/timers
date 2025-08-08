@@ -45,6 +45,9 @@ android {
 
 dependencies {
     implementation(project(":core"))
+    implementation(project(":feature:timers"))
+    implementation(project(":feature:statistics"))
+    implementation(project(":feature:settings"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

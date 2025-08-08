@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.hordiiko.timers.feature.timers"
+    namespace = "com.hordiiko.feature.timers"
     compileSdk = 35
 
     defaultConfig {
@@ -38,6 +38,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))

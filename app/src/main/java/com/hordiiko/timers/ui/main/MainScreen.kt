@@ -20,12 +20,12 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.core.view.WindowInsetsControllerCompat
 import com.hordiiko.core.R
+import com.hordiiko.feature.timers.presentation.TimersScreen
 import com.hordiiko.timers.ui.navigation.NavigationItem
 
 private val navigationItems: List<NavigationItem> =
@@ -47,12 +47,9 @@ internal fun MainScreen() {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding),
-            contentAlignment = Alignment.Center
+                .padding(innerPadding)
         ) {
-            Text(
-                text = "Hello Android"
-            )
+            TimersScreen()
         }
     }
 }
