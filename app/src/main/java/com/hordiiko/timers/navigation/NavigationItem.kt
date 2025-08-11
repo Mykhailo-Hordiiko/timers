@@ -1,9 +1,11 @@
-package com.hordiiko.timers.ui.navigation
+package com.hordiiko.timers.navigation
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
+import com.hordiiko.core.navigation.Screen
 
 internal data class NavigationItem(
     val icon: ImageVector,
-    @StringRes val labelResId: Int
+    @StringRes val labelResId: Int,
+    val screen: Screen
 )

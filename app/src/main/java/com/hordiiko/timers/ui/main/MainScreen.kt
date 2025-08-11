@@ -24,32 +24,38 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.hordiiko.core.R
-import com.hordiiko.feature.timers.presentation.TimersScreen
-import com.hordiiko.timers.ui.navigation.NavigationItem
+import com.hordiiko.core.navigation.Screen
+import com.hordiiko.core.navigation.currentRouteOrDefault
+import com.hordiiko.timers.navigation.AppNavGraph
+import com.hordiiko.timers.navigation.NavigationItem
 
 private val navigationItems: List<NavigationItem> =
     listOf(
-        NavigationItem(Icons.Outlined.Timer, R.string.timers),
-        NavigationItem(Icons.Outlined.InsertChart, R.string.statistics),
-        NavigationItem(Icons.Outlined.Settings, R.string.settings)
+        NavigationItem(Icons.Outlined.Timer, R.string.timers, Screen.Timers),
+        NavigationItem(Icons.Outlined.InsertChart, R.string.statistics, Screen.Statistics),
+        NavigationItem(Icons.Outlined.Settings, R.string.settings, Screen.Settings)
     )
 
 
 @Composable
 internal fun MainScreen() {
+    val navController: NavHostController = rememberNavController()
+
     MainStatusBarAppearance()
 
     Scaffold(
-        topBar = { MainTopAppBar() },
-        bottomBar = { MainNavigationBar() }
+        topBar = { MainTopAppBar(navController) },
+        bottomBar = { MainNavigationBar(navController) }
     ) { innerPadding ->
         Box(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            TimersScreen()
+            AppNavGraph(navController)
         }
     }
 }
@@ -69,23 +75,39 @@ private fun MainStatusBarAppearance(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun MainTopAppBar() {
+private fun MainTopAppBar(navController: NavHostController) {
+    val currentRoute: String = navController.currentRouteOrDefault(Screen.Timers.route)
+    val currentNavigationItem: NavigationItem? =
+        navigationItems.find { it.screen.route == currentRoute }
+
+    val label: String = currentNavigationItem?.labelResId?.let { stringResource(it) } ?: ""
+
     TopAppBar(
         title = {
             Text(
-                text = stringResource(R.string.timers)
+                text = label
             )
         }
     )
 }
 
 @Composable
-private fun MainNavigationBar() {
+private fun MainNavigationBar(navController: NavHostController) {
     NavigationBar {
+        val currentRoute: String = navController.currentRouteOrDefault(Screen.Timers.route)
+
         navigationItems.forEach { item ->
             NavigationBarItem(
-                selected = false,
-                onClick = {},
+                selected = item.screen.route == currentRoute,
+                onClick = {
+                    navController.navigate(item.screen.route) {
+                        launchSingleTop = true
+
+                        popUpTo(navController.graph.id) {
+                            inclusive = true
+                        }
+                    }
+                },
                 icon = {
                     Icon(
                         imageVector = item.icon,

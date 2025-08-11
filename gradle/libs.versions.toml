@@ -8,7 +8,9 @@ lifecycleRuntimeKtx = "2.9.1"
 ksp = "2.1.21-2.0.1"
 hilt = "2.56.2"
 
+navigationCommonAndroid = "2.9.3"
 material = "1.12.0"
+
 activityCompose = "1.10.1"
 composeBom = "2025.06.01"
 
@@ -24,10 +26,13 @@ androidx-lifecycle-runtime-ktx = { group = "androidx.lifecycle", name = "lifecyc
 google-hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 google-hilt-android-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
 
+androidx-navigation-common-android = { group = "androidx.navigation", name = "navigation-common-android", version.ref = "navigationCommonAndroid" }
 google-material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version.ref = "activityCompose" }
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 
+androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose" }
 androidx-material-icons-extended = { group = "androidx.compose.material", name = "material-icons-extended" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
