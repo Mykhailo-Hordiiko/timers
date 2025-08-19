@@ -1,5 +1,12 @@
 <resources>
-    <string name="timers">Таймери</string>
-    <string name="statistics">Статистика</string>
-    <string name="settings">Налаштування</string>
+    <string name="screen_timers">Таймери</string>
+    <string name="screen_statistics">Статистика</string>
+    <string name="screen_settings">Налаштування</string>
+
+    <string name="timer_stopwatch">Секундомір</string>
+    <string name="timer_countdown">Таймер</string>
+    <string name="timer_pomodoro">Pomodoro</string>
+    <string name="timer_tabata">Tabata</string>
+
+    <string name="timer_not_added_yet">Ще не додано</string>
 </resources>

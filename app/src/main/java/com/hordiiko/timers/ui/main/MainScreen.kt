@@ -34,9 +34,9 @@ import com.hordiiko.timers.navigation.NavigationItem
 
 private val navigationItems: List<NavigationItem> =
     listOf(
-        NavigationItem(Icons.Outlined.Timer, R.string.timers, Screen.Timers),
-        NavigationItem(Icons.Outlined.InsertChart, R.string.statistics, Screen.Statistics),
-        NavigationItem(Icons.Outlined.Settings, R.string.settings, Screen.Settings)
+        NavigationItem(Icons.Outlined.Timer, R.string.screen_timers, Screen.Timers),
+        NavigationItem(Icons.Outlined.InsertChart, R.string.screen_statistics, Screen.Statistics),
+        NavigationItem(Icons.Outlined.Settings, R.string.screen_settings, Screen.Settings)
     )
 
 

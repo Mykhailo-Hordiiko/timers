@@ -16,7 +16,7 @@ internal fun StatisticsScreen() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = stringResource(R.string.statistics)
+            text = stringResource(R.string.screen_statistics)
         )
     }
 }

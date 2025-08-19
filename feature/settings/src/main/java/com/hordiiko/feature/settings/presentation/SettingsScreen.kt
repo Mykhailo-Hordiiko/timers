@@ -16,7 +16,7 @@ internal fun SettingsScreen() {
         contentAlignment = Alignment.Center
     ) {
         Text(
-            text = stringResource(R.string.settings)
+            text = stringResource(R.string.screen_settings)
         )
     }
 }
