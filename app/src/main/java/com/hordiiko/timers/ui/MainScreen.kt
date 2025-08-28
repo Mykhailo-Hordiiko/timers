@@ -1,4 +1,4 @@
-package com.hordiiko.timers.ui.main
+package com.hordiiko.timers.ui
 
 import android.app.Activity
 import android.view.View
@@ -30,7 +30,6 @@ import com.hordiiko.core.R
 import com.hordiiko.core.navigation.Screen
 import com.hordiiko.core.navigation.currentRouteOrDefault
 import com.hordiiko.timers.navigation.AppNavGraph
-import com.hordiiko.timers.navigation.NavigationItem
 
 private val navigationItems: List<NavigationItem> =
     listOf(
@@ -100,11 +99,13 @@ private fun MainNavigationBar(navController: NavHostController) {
             NavigationBarItem(
                 selected = item.screen.route == currentRoute,
                 onClick = {
-                    navController.navigate(item.screen.route) {
-                        launchSingleTop = true
+                    if (item.screen.route != currentRoute) {
+                        navController.navigate(item.screen.route) {
+                            launchSingleTop = true
 
-                        popUpTo(navController.graph.id) {
-                            inclusive = true
+                            popUpTo(navController.graph.id) {
+                                inclusive = true
+                            }
                         }
                     }
                 },

@@ -1,4 +1,4 @@
-package com.hordiiko.timers.navigation
+package com.hordiiko.timers.ui
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector
