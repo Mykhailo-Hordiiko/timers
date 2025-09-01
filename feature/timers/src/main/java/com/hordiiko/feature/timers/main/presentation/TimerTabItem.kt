@@ -1,4 +1,4 @@
-package com.hordiiko.feature.timers.timer.presentation
+package com.hordiiko.feature.timers.main.presentation
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.vector.ImageVector

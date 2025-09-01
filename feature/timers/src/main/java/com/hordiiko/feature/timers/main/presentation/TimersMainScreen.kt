@@ -1,4 +1,4 @@
-package com.hordiiko.feature.timers.timer.presentation
+package com.hordiiko.feature.timers.main.presentation
 
 import androidx.compose.animation.Crossfade
 import androidx.compose.foundation.background
@@ -19,14 +19,11 @@ import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hordiiko.core.R
 import com.hordiiko.core.timers.TimerType
 import com.hordiiko.core.ui.theme.spacing
@@ -45,20 +42,20 @@ private val tabItems: List<TimerTabItem> =
 
 
 @Composable
-internal fun TimersMainScreen() {
-    var selectedType: TimerType by remember { mutableStateOf(TimerType.Stopwatch) }
-
+internal fun TimersMainScreen(
+    viewModel: TimersMainViewModel = viewModel()
+) {
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         TimersTabRow(
             items = tabItems,
-            selectedType = selectedType,
-            onTypeSelected = { selectedType = it }
+            selectedType = viewModel.selectedType,
+            onTypeSelected = { viewModel.selectType(it) }
         )
 
         Crossfade(
-            targetState = selectedType
+            targetState = viewModel.selectedType
         ) { type ->
             when (type) {
                 TimerType.Stopwatch -> StopwatchList()
