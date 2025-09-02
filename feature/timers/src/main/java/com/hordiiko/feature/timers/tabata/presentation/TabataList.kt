@@ -1,4 +1,4 @@
-package com.hordiiko.feature.timers.tabataTimer.presentation
+package com.hordiiko.feature.timers.tabata.presentation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.FitnessCenter

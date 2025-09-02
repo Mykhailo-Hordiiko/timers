@@ -1,4 +1,4 @@
-package com.hordiiko.feature.timers.stopwatchTimer.presentation
+package com.hordiiko.feature.timers.stopwatch.presentation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Timer

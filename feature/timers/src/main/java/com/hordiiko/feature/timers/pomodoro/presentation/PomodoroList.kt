@@ -1,4 +1,4 @@
-package com.hordiiko.feature.timers.pomodoroTimer.presentation
+package com.hordiiko.feature.timers.pomodoro.presentation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.School

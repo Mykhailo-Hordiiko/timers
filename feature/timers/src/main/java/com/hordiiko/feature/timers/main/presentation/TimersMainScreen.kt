@@ -27,10 +27,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hordiiko.core.R
 import com.hordiiko.core.timers.TimerType
 import com.hordiiko.core.ui.theme.spacing
-import com.hordiiko.feature.timers.countdownTimer.presentation.CountdownList
-import com.hordiiko.feature.timers.pomodoroTimer.presentation.PomodoroList
-import com.hordiiko.feature.timers.stopwatchTimer.presentation.StopwatchList
-import com.hordiiko.feature.timers.tabataTimer.presentation.TabataList
+import com.hordiiko.feature.timers.countdown.presentation.CountdownList
+import com.hordiiko.feature.timers.pomodoro.presentation.PomodoroList
+import com.hordiiko.feature.timers.stopwatch.presentation.StopwatchList
+import com.hordiiko.feature.timers.tabata.presentation.TabataList
 
 private val tabItems: List<TimerTabItem> =
     listOf(

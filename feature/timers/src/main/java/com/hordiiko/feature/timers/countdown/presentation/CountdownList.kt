@@ -1,4 +1,4 @@
-package com.hordiiko.feature.timers.countdownTimer.presentation
+package com.hordiiko.feature.timers.countdown.presentation
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.HourglassEmpty
