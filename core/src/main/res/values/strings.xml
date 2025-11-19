@@ -14,9 +14,4 @@
     <string name="timer_new_tabata">New tabata</string>
 
     <string name="timer_not_added_yet">Not added yet</string>
-    <string name="timer_open_create_menu">Open create timer menu</string>
-    <string name="timer_close_create_menu">Close create timer menu</string>
-
-    <string name="back">Back</string>
-    <string name="confirm">Confirm</string>
 </resources>

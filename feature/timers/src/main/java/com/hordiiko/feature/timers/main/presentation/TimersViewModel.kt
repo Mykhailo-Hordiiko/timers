@@ -6,7 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.hordiiko.core.timers.TimerType
 
-class TimersMainViewModel : ViewModel() {
+class TimersViewModel : ViewModel() {
 
     var selectedType: TimerType by mutableStateOf(TimerType.Stopwatch)
         private set

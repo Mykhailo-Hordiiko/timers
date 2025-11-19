@@ -68,8 +68,8 @@ private val timers: ScreenConfig =
             button = FabMenuButtonConfig(
                 collapsedIcon = Icons.Outlined.Add,
                 expandedIcon = Icons.Outlined.Close,
-                collapsedContentDescriptionResId = R.string.timer_open_create_menu,
-                expandedContentDescriptionResId = R.string.timer_close_create_menu
+                collapsedContentDescriptionResId = R.string.cd_timer_open_create_menu,
+                expandedContentDescriptionResId = R.string.cd_timer_close_create_menu
             ),
             items = timersFabMenuItems
         ),
@@ -96,7 +96,7 @@ private val settings: ScreenConfig =
 private val backButton: TopAppBarButtonConfig =
     TopAppBarButtonConfig(
         icon = Icons.AutoMirrored.Outlined.ArrowBack,
-        contentDescriptionResId = R.string.back,
+        contentDescriptionResId = R.string.cd_back,
         action = ScreenAction.GoBack
     )
 
@@ -134,7 +134,7 @@ private fun timerCreate(
             headlineResId = headlineResId,
             trailingButton = TopAppBarButtonConfig(
                 icon = Icons.Outlined.Done,
-                contentDescriptionResId = R.string.confirm,
+                contentDescriptionResId = R.string.cd_confirm,
                 action = trailingButtonAction
             )
         ),

@@ -6,6 +6,6 @@ import com.hordiiko.core.timers.TimerType
 
 internal data class TimerTabItem(
     val icon: ImageVector,
-    @StringRes val descriptionResId: Int,
+    @StringRes val contentDescriptionResId: Int,
     val timerType: TimerType
 )

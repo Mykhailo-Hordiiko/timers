@@ -34,16 +34,32 @@ import com.hordiiko.feature.timers.tabata.presentation.TabataList
 
 private val tabItems: List<TimerTabItem> =
     listOf(
-        TimerTabItem(Icons.Outlined.Timer, R.string.timer_stopwatch, TimerType.Stopwatch),
-        TimerTabItem(Icons.Outlined.HourglassEmpty, R.string.timer_countdown, TimerType.Countdown),
-        TimerTabItem(Icons.Outlined.School, R.string.timer_pomodoro, TimerType.Pomodoro),
-        TimerTabItem(Icons.Outlined.FitnessCenter, R.string.timer_tabata, TimerType.Tabata)
+        TimerTabItem(
+            icon = Icons.Outlined.Timer,
+            contentDescriptionResId = R.string.cd_timer_stopwatch,
+            timerType = TimerType.Stopwatch
+        ),
+        TimerTabItem(
+            icon = Icons.Outlined.HourglassEmpty,
+            contentDescriptionResId = R.string.cd_timer_countdown,
+            timerType = TimerType.Countdown
+        ),
+        TimerTabItem(
+            icon = Icons.Outlined.School,
+            contentDescriptionResId = R.string.cd_timer_pomodoro,
+            timerType = TimerType.Pomodoro
+        ),
+        TimerTabItem(
+            icon = Icons.Outlined.FitnessCenter,
+            contentDescriptionResId = R.string.cd_timer_tabata,
+            timerType = TimerType.Tabata
+        )
     )
 
 
 @Composable
-internal fun TimersMainScreen(
-    viewModel: TimersMainViewModel = viewModel()
+internal fun TimersScreen(
+    viewModel: TimersViewModel = viewModel()
 ) {
     Column(
         modifier = Modifier.fillMaxSize()
@@ -124,7 +140,7 @@ private fun TimerTab(
                     vertical = MaterialTheme.spacing.extraSmall
                 ),
             imageVector = item.icon,
-            contentDescription = stringResource(item.descriptionResId),
+            contentDescription = stringResource(item.contentDescriptionResId),
             tint = iconColor
         )
     }

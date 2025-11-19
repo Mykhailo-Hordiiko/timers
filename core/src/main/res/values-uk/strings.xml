@@ -14,9 +14,4 @@
     <string name="timer_new_tabata">Новий tabata</string>
 
     <string name="timer_not_added_yet">Ще не додано</string>
-    <string name="timer_open_create_menu">Відкрити меню створення таймера</string>
-    <string name="timer_close_create_menu">Закрити меню створення таймера</string>
-
-    <string name="back">Назад</string>
-    <string name="confirm">Підтвердити</string>
 </resources>

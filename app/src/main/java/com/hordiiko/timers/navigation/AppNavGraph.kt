@@ -4,9 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.hordiiko.core.navigation.Screen
-import com.hordiiko.feature.settings.navigation.settingsScreen
-import com.hordiiko.feature.statistics.navigation.statisticsScreen
-import com.hordiiko.feature.timers.navigation.timersScreen
+import com.hordiiko.feature.settings.navigation.settingsNavGraph
+import com.hordiiko.feature.statistics.navigation.statisticsNavGraph
+import com.hordiiko.feature.timers.navigation.timersNavGraph
 
 @Composable
 internal fun AppNavGraph(navController: NavHostController) {
@@ -14,8 +14,8 @@ internal fun AppNavGraph(navController: NavHostController) {
         navController = navController,
         startDestination = Screen.Timers.route
     ) {
-        timersScreen()
-        statisticsScreen()
-        settingsScreen()
+        timersNavGraph()
+        statisticsNavGraph()
+        settingsNavGraph()
     }
 }

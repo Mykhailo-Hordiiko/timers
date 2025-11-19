@@ -1,0 +1,12 @@
+<resources>
+    <string name="cd_timer_stopwatch">Stopwatch</string>
+    <string name="cd_timer_countdown">Countdown</string>
+    <string name="cd_timer_pomodoro">Pomodoro</string>
+    <string name="cd_timer_tabata">Tabata</string>
+
+    <string name="cd_timer_open_create_menu">Open create timer menu</string>
+    <string name="cd_timer_close_create_menu">Close create timer menu</string>
+
+    <string name="cd_back">Back</string>
+    <string name="cd_confirm">Confirm</string>
+</resources>
