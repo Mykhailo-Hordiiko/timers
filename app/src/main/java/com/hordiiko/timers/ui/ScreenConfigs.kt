@@ -4,40 +4,12 @@ import androidx.annotation.StringRes
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Add
-import androidx.compose.material.icons.outlined.Close
 import androidx.compose.material.icons.outlined.Done
-import androidx.compose.material.icons.outlined.FitnessCenter
-import androidx.compose.material.icons.outlined.HourglassEmpty
 import androidx.compose.material.icons.outlined.InsertChart
-import androidx.compose.material.icons.outlined.School
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material.icons.outlined.Timer
 import com.hordiiko.core.R
 import com.hordiiko.core.navigation.Screen
-
-private val timersFabMenuItems: List<FabMenuItemConfig> =
-    listOf(
-        FabMenuItemConfig(
-            icon = Icons.Outlined.Timer,
-            labelResId = R.string.timer_stopwatch,
-            action = ScreenAction.NavigateToStopwatchCreate
-        ),
-        FabMenuItemConfig(
-            icon = Icons.Outlined.HourglassEmpty,
-            labelResId = R.string.timer_countdown,
-            action = ScreenAction.NavigateToCountdownCreate
-        ),
-        FabMenuItemConfig(
-            icon = Icons.Outlined.School,
-            labelResId = R.string.timer_pomodoro,
-            action = ScreenAction.NavigateToPomodoroCreate
-        ),
-        FabMenuItemConfig(
-            icon = Icons.Outlined.FitnessCenter,
-            labelResId = R.string.timer_tabata,
-            action = ScreenAction.NavigateToTabataCreate
-        )
-    )
 
 internal val navigationBarItems: List<NavigationBarItemConfig> =
     listOf(
@@ -64,14 +36,10 @@ private val timers: ScreenConfig =
         topAppBar = TopAppBarConfig(
             headlineResId = R.string.screen_timers
         ),
-        fabMenu = FabMenuConfig(
-            button = FabMenuButtonConfig(
-                collapsedIcon = Icons.Outlined.Add,
-                expandedIcon = Icons.Outlined.Close,
-                collapsedContentDescriptionResId = R.string.cd_timer_open_create_menu,
-                expandedContentDescriptionResId = R.string.cd_timer_close_create_menu
-            ),
-            items = timersFabMenuItems
+        fab = FabConfig(
+            icon = Icons.Outlined.Add,
+            contentDescriptionResId = R.string.cd_timer_create,
+            action = ScreenAction.CreateTimer
         ),
         isNavigationBarVisible = true
     )

@@ -8,8 +8,5 @@ internal enum class ScreenAction {
     SavePomodoro,
     SaveTabata,
 
-    NavigateToStopwatchCreate,
-    NavigateToCountdownCreate,
-    NavigateToPomodoroCreate,
-    NavigateToTabataCreate
+    CreateTimer
 }

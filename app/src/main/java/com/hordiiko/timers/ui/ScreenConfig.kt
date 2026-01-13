@@ -5,7 +5,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 
 internal data class ScreenConfig(
     val topAppBar: TopAppBarConfig? = null,
-    val fabMenu: FabMenuConfig? = null,
+    val fab: FabConfig? = null,
     val isNavigationBarVisible: Boolean = false
 )
 
@@ -23,21 +23,9 @@ internal data class TopAppBarButtonConfig(
 )
 
 
-internal data class FabMenuConfig(
-    val button: FabMenuButtonConfig,
-    val items: List<FabMenuItemConfig>
-)
-
-internal data class FabMenuButtonConfig(
-    val collapsedIcon: ImageVector,
-    val expandedIcon: ImageVector,
-    val collapsedContentDescriptionResId: Int,
-    val expandedContentDescriptionResId: Int
-)
-
-internal data class FabMenuItemConfig(
+internal data class FabConfig(
     val icon: ImageVector,
-    val labelResId: Int,
+    val contentDescriptionResId: Int,
     val action: ScreenAction
 )
 

@@ -8,7 +8,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 fun NavController.currentRouteOrDefault(default: String = ""): String =
     this.currentBackStackEntryAsState().value?.destination?.route ?: default
 
-fun NavController.navigateToRootScreen(route: String) {
+fun NavController.navigateToRoot(route: String) {
     val graphId: Int = this.graph.id
 
     this.navigate(route) {
@@ -17,5 +17,11 @@ fun NavController.navigateToRootScreen(route: String) {
         popUpTo(graphId) {
             inclusive = true
         }
+    }
+}
+
+fun NavController.navigateTo(route: String) {
+    this.navigate(route) {
+        launchSingleTop = true
     }
 }

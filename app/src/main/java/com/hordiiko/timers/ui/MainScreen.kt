@@ -37,7 +37,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.hordiiko.core.navigation.Screen
 import com.hordiiko.core.navigation.currentRouteOrDefault
-import com.hordiiko.core.navigation.navigateToRootScreen
+import com.hordiiko.core.navigation.navigateTo
+import com.hordiiko.core.navigation.navigateToRoot
 import com.hordiiko.timers.navigation.AppNavGraph
 
 // region Screen
@@ -59,8 +60,9 @@ internal fun MainScreen() {
             )
         },
         floatingActionButton = {
-            MainFabMenu(
-                config = currentScreenConfig.fabMenu
+            MainFab(
+                config = currentScreenConfig.fab,
+                navController = navController
             )
         },
         bottomBar = {
@@ -172,10 +174,10 @@ private fun MainTopAppBarTitle(@StringRes resId: Int) {
 
 // endregion
 
-// region FabMenu
+// region Fab
 
 @Composable
-private fun MainFabMenu(config: FabMenuConfig?) {
+private fun MainFab(config: FabConfig?, navController: NavHostController) {
     AnimatedVisibility(
         visible = config != null,
         enter = scaleIn() + fadeIn(),
@@ -183,11 +185,16 @@ private fun MainFabMenu(config: FabMenuConfig?) {
     ) {
         config?.let {
             FloatingActionButton(
-                onClick = {}
+                onClick = {
+                    performAction(
+                        action = it.action,
+                        navController = navController
+                    )
+                }
             ) {
                 Icon(
-                    imageVector = it.button.collapsedIcon,
-                    contentDescription = stringResource(it.button.collapsedContentDescriptionResId)
+                    imageVector = it.icon,
+                    contentDescription = stringResource(it.contentDescriptionResId)
                 )
             }
         }
@@ -246,7 +253,7 @@ private fun RowScope.MainNavigationBarItem(
         selected = config.route == currentRoute,
         onClick = {
             if (config.route != currentRoute) {
-                navController.navigateToRootScreen(config.route)
+                navController.navigateToRoot(config.route)
             }
         }
     )
@@ -257,7 +264,16 @@ private fun RowScope.MainNavigationBarItem(
 // region ScreenAction
 
 private fun performAction(action: ScreenAction, navController: NavHostController) {
+    when (action) {
+        ScreenAction.GoBack,
 
+        ScreenAction.SaveStopwatch,
+        ScreenAction.SaveCountdown,
+        ScreenAction.SavePomodoro,
+        ScreenAction.SaveTabata -> navController.popBackStack()
+
+        ScreenAction.CreateTimer -> navController.navigateTo(Screen.StopwatchCreate.route)
+    }
 }
 
 // endregion
