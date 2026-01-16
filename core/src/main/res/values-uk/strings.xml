@@ -1,8 +1,11 @@
 <resources>
+    <!--region screen-->
     <string name="screen_timers">Таймери</string>
     <string name="screen_statistics">Статистика</string>
     <string name="screen_settings">Налаштування</string>
+    <!--endregion-->
 
+    <!--region timer-->
     <string name="timer_stopwatch">Секундомір</string>
     <string name="timer_countdown">Таймер</string>
     <string name="timer_pomodoro">Pomodoro</string>
@@ -14,4 +17,5 @@
     <string name="timer_new_tabata">Новий tabata</string>
 
     <string name="timer_not_added_yet">Ще не додано</string>
+    <!--endregion-->
 </resources>

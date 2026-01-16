@@ -1,11 +1,15 @@
 <resources>
+    <!--region timer-->
     <string name="cd_timer_stopwatch">Секундомір</string>
     <string name="cd_timer_countdown">Таймер</string>
     <string name="cd_timer_pomodoro">Pomodoro</string>
     <string name="cd_timer_tabata">Tabata</string>
 
     <string name="cd_timer_create">Створити таймер</string>
+    <!--endregion-->
 
+    <!--region common-->
     <string name="cd_back">Назад</string>
     <string name="cd_confirm">Підтвердити</string>
+    <!--endregion-->
 </resources>
