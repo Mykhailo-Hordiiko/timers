@@ -1,4 +1,4 @@
-package com.hordiiko.timers.ui
+package com.hordiiko.timers.presentation
 
 import android.app.Activity
 import android.view.View
@@ -33,41 +33,48 @@ import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.hordiiko.core.navigation.Screen
 import com.hordiiko.core.navigation.currentRouteOrDefault
 import com.hordiiko.core.navigation.navigateTo
 import com.hordiiko.core.navigation.navigateToRoot
+import com.hordiiko.core.screen.FabConfig
+import com.hordiiko.core.screen.NavigationBarItemConfig
+import com.hordiiko.core.screen.Screen
+import com.hordiiko.core.screen.ScreenAction
+import com.hordiiko.core.screen.ScreenConfig
+import com.hordiiko.core.screen.TopAppBarButtonConfig
+import com.hordiiko.core.screen.TopAppBarConfig
+import com.hordiiko.core.screen.navigationBarItemsConfig
 import com.hordiiko.timers.navigation.AppNavGraph
 
 // region Screen
 
 @Composable
-internal fun MainScreen() {
+internal fun MainScreen(
+    viewModel: MainViewModel = viewModel()
+) {
     val navController: NavHostController = rememberNavController()
     val currentRoute: String = navController.currentRouteOrDefault(Screen.Timers.route)
-    val currentScreen: Screen = Screen.getByRouteOrDefault(currentRoute)
-    val currentScreenConfig: ScreenConfig = currentScreen.config
+    val screenConfig: ScreenConfig = viewModel.screenConfig
 
     MainStatusBarAppearance()
 
     Scaffold(
         topBar = {
             MainTopAppBar(
-                config = currentScreenConfig.topAppBar,
-                navController = navController
+                config = screenConfig.topAppBar
             )
         },
         floatingActionButton = {
             MainFab(
-                config = currentScreenConfig.fab,
-                navController = navController
+                config = screenConfig.fab
             )
         },
         bottomBar = {
             MainNavigationBar(
-                isVisible = currentScreenConfig.isNavigationBarVisible,
+                isVisible = screenConfig.isNavigationBarVisible,
                 currentRoute = currentRoute,
                 navController = navController
             )
@@ -78,7 +85,11 @@ internal fun MainScreen() {
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            AppNavGraph(navController)
+            AppNavGraph(
+                navController = navController,
+                updateScreenConfig = viewModel::updateScreenConfig,
+                performScreenAction = { performScreenAction(it, navController) }
+            )
         }
     }
 }
@@ -106,7 +117,7 @@ private fun MainStatusBarAppearance(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-private fun MainTopAppBar(config: TopAppBarConfig?, navController: NavHostController) {
+private fun MainTopAppBar(config: TopAppBarConfig?) {
     Box(
         modifier = Modifier.statusBarsPadding()
     ) {
@@ -123,8 +134,7 @@ private fun MainTopAppBar(config: TopAppBarConfig?, navController: NavHostContro
                 TopAppBar(
                     navigationIcon = {
                         MainTopAppBarButton(
-                            config = it.leadingButton,
-                            navController = navController
+                            config = it.leadingButton
                         )
                     },
                     title = {
@@ -134,8 +144,7 @@ private fun MainTopAppBar(config: TopAppBarConfig?, navController: NavHostContro
                     },
                     actions = {
                         MainTopAppBarButton(
-                            config = it.trailingButton,
-                            navController = navController
+                            config = it.trailingButton
                         )
                     }
                 )
@@ -145,15 +154,10 @@ private fun MainTopAppBar(config: TopAppBarConfig?, navController: NavHostContro
 }
 
 @Composable
-private fun MainTopAppBarButton(config: TopAppBarButtonConfig?, navController: NavHostController) {
+private fun MainTopAppBarButton(config: TopAppBarButtonConfig?) {
     config?.let {
         IconButton(
-            onClick = {
-                performAction(
-                    action = it.action,
-                    navController = navController
-                )
-            }
+            onClick = it.onClick
         ) {
             Icon(
                 imageVector = it.icon,
@@ -177,7 +181,7 @@ private fun MainTopAppBarTitle(@StringRes resId: Int) {
 // region Fab
 
 @Composable
-private fun MainFab(config: FabConfig?, navController: NavHostController) {
+private fun MainFab(config: FabConfig?) {
     AnimatedVisibility(
         visible = config != null,
         enter = scaleIn() + fadeIn(),
@@ -185,12 +189,7 @@ private fun MainFab(config: FabConfig?, navController: NavHostController) {
     ) {
         config?.let {
             FloatingActionButton(
-                onClick = {
-                    performAction(
-                        action = it.action,
-                        navController = navController
-                    )
-                }
+                onClick = it.onClick
             ) {
                 Icon(
                     imageVector = it.icon,
@@ -221,9 +220,9 @@ private fun MainNavigationBar(
         ) + fadeOut()
     ) {
         NavigationBar {
-            navigationBarItems.forEach { item ->
+            navigationBarItemsConfig.forEach { config ->
                 MainNavigationBarItem(
-                    config = item,
+                    config = config,
                     currentRoute = currentRoute,
                     navController = navController
                 )
@@ -263,16 +262,22 @@ private fun RowScope.MainNavigationBarItem(
 
 // region ScreenAction
 
-private fun performAction(action: ScreenAction, navController: NavHostController) {
+private fun performScreenAction(action: ScreenAction, navController: NavHostController) {
     when (action) {
-        ScreenAction.GoBack,
+        ScreenAction.GoBack ->
+            navController.popBackStack()
 
-        ScreenAction.SaveStopwatch,
-        ScreenAction.SaveCountdown,
-        ScreenAction.SavePomodoro,
-        ScreenAction.SaveTabata -> navController.popBackStack()
+        ScreenAction.OpenStopwatchCreate ->
+            navController.navigateTo(Screen.StopwatchCreate.route)
 
-        ScreenAction.CreateTimer -> navController.navigateTo(Screen.StopwatchCreate.route)
+        ScreenAction.OpenCountdownCreate ->
+            navController.navigateTo(Screen.CountdownCreate.route)
+
+        ScreenAction.OpenPomodoroCreate ->
+            navController.navigateTo(Screen.PomodoroCreate.route)
+
+        ScreenAction.OpenTabataCreate ->
+            navController.navigateTo(Screen.TabataCreate.route)
     }
 }
 

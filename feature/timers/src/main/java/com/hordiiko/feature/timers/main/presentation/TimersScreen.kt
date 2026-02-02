@@ -19,12 +19,16 @@ import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hordiiko.core.R
+import com.hordiiko.core.screen.ScreenAction
+import com.hordiiko.core.screen.ScreenConfig
+import com.hordiiko.core.screen.timersConfig
 import com.hordiiko.core.timers.TimerType
 import com.hordiiko.core.ui.theme.spacing
 import com.hordiiko.feature.timers.countdown.presentation.CountdownList
@@ -59,19 +63,31 @@ private val tabItems: List<TimerTabItem> =
 
 @Composable
 internal fun TimersScreen(
+    updateScreenConfig: (ScreenConfig) -> Unit,
+    performScreenAction: (ScreenAction) -> Unit,
     viewModel: TimersViewModel = viewModel()
 ) {
+    LaunchedEffect(Unit) {
+        updateScreenConfig(
+            timersConfig(
+                onFabClick = {
+                    performScreenAction(viewModel.onFabClick())
+                }
+            )
+        )
+    }
+
     Column(
         modifier = Modifier.fillMaxSize()
     ) {
         TimersTabRow(
             items = tabItems,
-            selectedType = viewModel.selectedType,
-            onTypeSelected = { viewModel.selectType(it) }
+            selectedType = viewModel.timerType,
+            onTypeSelected = viewModel::selectTimerType
         )
 
         Crossfade(
-            targetState = viewModel.selectedType
+            targetState = viewModel.timerType
         ) { type ->
             when (type) {
                 TimerType.Stopwatch -> StopwatchList()

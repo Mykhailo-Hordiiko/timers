@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import com.hordiiko.core.ui.theme.AppTheme
-import com.hordiiko.timers.ui.MainScreen
+import com.hordiiko.timers.presentation.MainScreen
 
 class MainActivity : ComponentActivity() {
 
