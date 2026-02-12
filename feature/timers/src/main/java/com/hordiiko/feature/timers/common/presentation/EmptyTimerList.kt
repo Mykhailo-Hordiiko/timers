@@ -14,9 +14,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
-import com.hordiiko.core.R
 import com.hordiiko.core.ui.theme.size
 import com.hordiiko.core.ui.theme.spacing
+import com.hordiiko.feature.timers.R
 
 @Composable
 internal fun EmptyTimerList(

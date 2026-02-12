@@ -35,23 +35,27 @@ val navigationBarItemsConfig: List<NavigationBarItemConfig> =
         NavigationBarItemConfig(
             icon = Icons.Outlined.Timer,
             labelResId = R.string.screen_timers,
-            route = Screen.Timers.route
+            screen = Screen.Timers
         ),
         NavigationBarItemConfig(
             icon = Icons.Outlined.InsertChart,
             labelResId = R.string.screen_statistics,
-            route = Screen.Statistics.route
+            screen = Screen.Statistics
         ),
         NavigationBarItemConfig(
             icon = Icons.Outlined.Settings,
             labelResId = R.string.screen_settings,
-            route = Screen.Settings.route
+            screen = Screen.Settings
         )
     )
 
 // endregion
 
 // region Root Screens
+
+val startScreen: Screen = Screen.Timers
+
+val startConfig: ScreenConfig = timersConfig()
 
 fun timersConfig(
     onFabClick: () -> Unit = {}

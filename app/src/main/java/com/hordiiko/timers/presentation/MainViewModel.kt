@@ -5,11 +5,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import com.hordiiko.core.screen.ScreenConfig
-import com.hordiiko.core.screen.timersConfig
+import com.hordiiko.core.screen.startConfig
 
 class MainViewModel : ViewModel() {
 
-    internal var screenConfig: ScreenConfig by mutableStateOf(timersConfig())
+    internal var screenConfig: ScreenConfig by mutableStateOf(startConfig)
         private set
 
     internal fun updateScreenConfig(config: ScreenConfig) {

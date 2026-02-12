@@ -15,7 +15,5 @@
     <string name="timer_new_countdown">New countdown</string>
     <string name="timer_new_pomodoro">New pomodoro</string>
     <string name="timer_new_tabata">New tabata</string>
-
-    <string name="timer_not_added_yet">Not added yet</string>
     <!--endregion-->
 </resources>

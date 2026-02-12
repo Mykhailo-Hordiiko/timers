@@ -33,5 +33,5 @@ data class FabConfig(
 data class NavigationBarItemConfig(
     val icon: ImageVector,
     @StringRes val labelResId: Int,
-    val route: String
+    val screen: Screen
 )

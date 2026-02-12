@@ -47,6 +47,7 @@ import com.hordiiko.core.screen.ScreenConfig
 import com.hordiiko.core.screen.TopAppBarButtonConfig
 import com.hordiiko.core.screen.TopAppBarConfig
 import com.hordiiko.core.screen.navigationBarItemsConfig
+import com.hordiiko.core.screen.startScreen
 import com.hordiiko.timers.navigation.AppNavGraph
 
 // region Screen
@@ -56,7 +57,7 @@ internal fun MainScreen(
     viewModel: MainViewModel = viewModel()
 ) {
     val navController: NavHostController = rememberNavController()
-    val currentRoute: String = navController.currentRouteOrDefault(Screen.Timers.route)
+    val currentRoute: String = navController.currentRouteOrDefault(startScreen.route)
     val screenConfig: ScreenConfig = viewModel.screenConfig
 
     MainStatusBarAppearance()
@@ -249,10 +250,10 @@ private fun RowScope.MainNavigationBarItem(
                 text = stringResource(config.labelResId)
             )
         },
-        selected = config.route == currentRoute,
+        selected = config.screen.route == currentRoute,
         onClick = {
-            if (config.route != currentRoute) {
-                navController.navigateToRoot(config.route)
+            if (config.screen.route != currentRoute) {
+                navController.navigateToRoot(config.screen)
             }
         }
     )
@@ -268,16 +269,16 @@ private fun performScreenAction(action: ScreenAction, navController: NavHostCont
             navController.popBackStack()
 
         ScreenAction.OpenStopwatchCreate ->
-            navController.navigateTo(Screen.StopwatchCreate.route)
+            navController.navigateTo(Screen.StopwatchCreate)
 
         ScreenAction.OpenCountdownCreate ->
-            navController.navigateTo(Screen.CountdownCreate.route)
+            navController.navigateTo(Screen.CountdownCreate)
 
         ScreenAction.OpenPomodoroCreate ->
-            navController.navigateTo(Screen.PomodoroCreate.route)
+            navController.navigateTo(Screen.PomodoroCreate)
 
         ScreenAction.OpenTabataCreate ->
-            navController.navigateTo(Screen.TabataCreate.route)
+            navController.navigateTo(Screen.TabataCreate)
     }
 }
 

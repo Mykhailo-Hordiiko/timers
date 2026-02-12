@@ -15,7 +15,5 @@
     <string name="timer_new_countdown">Новий таймер</string>
     <string name="timer_new_pomodoro">Новий pomodoro</string>
     <string name="timer_new_tabata">Новий tabata</string>
-
-    <string name="timer_not_added_yet">Ще не додано</string>
     <!--endregion-->
 </resources>
