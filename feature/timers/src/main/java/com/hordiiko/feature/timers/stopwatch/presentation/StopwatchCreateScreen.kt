@@ -3,24 +3,22 @@ package com.hordiiko.feature.timers.stopwatch.presentation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.hordiiko.core.screen.ScreenAction
-import com.hordiiko.core.screen.ScreenConfig
+import com.hordiiko.core.screen.ScreenController
 import com.hordiiko.core.screen.stopwatchCreateConfig
 
 @Composable
 internal fun StopwatchCreateScreen(
-    updateScreenConfig: (ScreenConfig) -> Unit,
-    performScreenAction: (ScreenAction) -> Unit,
+    screenController: ScreenController,
     viewModel: StopwatchCreateViewModel = viewModel()
 ) {
     LaunchedEffect(Unit) {
-        updateScreenConfig(
+        screenController.updateConfig(
             stopwatchCreateConfig(
                 onBackButtonClick = {
-                    performScreenAction(viewModel.onBackButtonClick())
+                    screenController.performAction(viewModel.onBackButtonClick())
                 },
                 onConfirmButtonClick = {
-                    performScreenAction(viewModel.onConfirmButtonClick())
+                    screenController.performAction(viewModel.onConfirmButtonClick())
                 }
             )
         )

@@ -28,6 +28,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
@@ -37,13 +38,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.hordiiko.core.navigation.currentRouteOrDefault
-import com.hordiiko.core.navigation.navigateTo
 import com.hordiiko.core.navigation.navigateToRoot
 import com.hordiiko.core.screen.FabConfig
 import com.hordiiko.core.screen.NavigationBarItemConfig
-import com.hordiiko.core.screen.Screen
-import com.hordiiko.core.screen.ScreenAction
 import com.hordiiko.core.screen.ScreenConfig
+import com.hordiiko.core.screen.ScreenController
 import com.hordiiko.core.screen.TopAppBarButtonConfig
 import com.hordiiko.core.screen.TopAppBarConfig
 import com.hordiiko.core.screen.navigationBarItemsConfig
@@ -57,6 +56,13 @@ internal fun MainScreen(
     viewModel: MainViewModel = viewModel()
 ) {
     val navController: NavHostController = rememberNavController()
+    val screenController: ScreenController = remember(navController) {
+        MainScreenController(
+            navController = navController,
+            updateScreenConfig = viewModel::updateScreenConfig
+        )
+    }
+
     val currentRoute: String = navController.currentRouteOrDefault(startScreen.route)
     val screenConfig: ScreenConfig = viewModel.screenConfig
 
@@ -81,6 +87,7 @@ internal fun MainScreen(
             )
         }
     ) { innerPadding ->
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -88,8 +95,7 @@ internal fun MainScreen(
         ) {
             AppNavGraph(
                 navController = navController,
-                updateScreenConfig = viewModel::updateScreenConfig,
-                performScreenAction = { performScreenAction(it, navController) }
+                screenController = screenController
             )
         }
     }
@@ -257,29 +263,6 @@ private fun RowScope.MainNavigationBarItem(
             }
         }
     )
-}
-
-// endregion
-
-// region ScreenAction
-
-private fun performScreenAction(action: ScreenAction, navController: NavHostController) {
-    when (action) {
-        ScreenAction.GoBack ->
-            navController.popBackStack()
-
-        ScreenAction.OpenStopwatchCreate ->
-            navController.navigateTo(Screen.StopwatchCreate)
-
-        ScreenAction.OpenCountdownCreate ->
-            navController.navigateTo(Screen.CountdownCreate)
-
-        ScreenAction.OpenPomodoroCreate ->
-            navController.navigateTo(Screen.PomodoroCreate)
-
-        ScreenAction.OpenTabataCreate ->
-            navController.navigateTo(Screen.TabataCreate)
-    }
 }
 
 // endregion

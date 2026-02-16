@@ -9,17 +9,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.hordiiko.core.R
-import com.hordiiko.core.screen.ScreenConfig
+import com.hordiiko.core.screen.ScreenController
 import com.hordiiko.core.screen.statisticsConfig
 
 @Composable
-internal fun StatisticsScreen(
-    updateScreenConfig: (ScreenConfig) -> Unit
-) {
+internal fun StatisticsScreen(screenController: ScreenController) {
     LaunchedEffect(Unit) {
-        updateScreenConfig(
-            statisticsConfig()
-        )
+        screenController.updateConfig(statisticsConfig())
     }
 
     Box(

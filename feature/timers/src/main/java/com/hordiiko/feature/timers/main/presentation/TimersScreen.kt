@@ -26,8 +26,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hordiiko.core.R
-import com.hordiiko.core.screen.ScreenAction
-import com.hordiiko.core.screen.ScreenConfig
+import com.hordiiko.core.screen.ScreenController
 import com.hordiiko.core.screen.timersConfig
 import com.hordiiko.core.timers.TimerType
 import com.hordiiko.core.ui.theme.spacing
@@ -63,15 +62,14 @@ private val tabItems: List<TimerTabItem> =
 
 @Composable
 internal fun TimersScreen(
-    updateScreenConfig: (ScreenConfig) -> Unit,
-    performScreenAction: (ScreenAction) -> Unit,
+    screenController: ScreenController,
     viewModel: TimersViewModel = viewModel()
 ) {
     LaunchedEffect(Unit) {
-        updateScreenConfig(
+        screenController.updateConfig(
             timersConfig(
                 onFabClick = {
-                    performScreenAction(viewModel.onFabClick())
+                    screenController.performAction(viewModel.onFabClick())
                 }
             )
         )
