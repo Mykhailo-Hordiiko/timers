@@ -1,4 +1,4 @@
-package com.hordiiko.timers.presentation
+package com.hordiiko.app.presentation
 
 import androidx.navigation.NavHostController
 import com.hordiiko.core.navigation.navigateTo

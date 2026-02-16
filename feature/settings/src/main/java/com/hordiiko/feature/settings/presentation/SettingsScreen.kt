@@ -10,12 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.hordiiko.core.R
 import com.hordiiko.core.screen.ScreenController
-import com.hordiiko.core.screen.settingsConfig
+import com.hordiiko.core.screen.settingsScreenConfig
 
 @Composable
 internal fun SettingsScreen(screenController: ScreenController) {
     LaunchedEffect(Unit) {
-        screenController.updateConfig(settingsConfig())
+        screenController.updateConfig(settingsScreenConfig())
     }
 
     Box(

@@ -27,7 +27,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hordiiko.core.R
 import com.hordiiko.core.screen.ScreenController
-import com.hordiiko.core.screen.timersConfig
+import com.hordiiko.core.screen.timersScreenConfig
 import com.hordiiko.core.timers.TimerType
 import com.hordiiko.core.ui.theme.spacing
 import com.hordiiko.feature.timers.countdown.presentation.CountdownList
@@ -67,7 +67,7 @@ internal fun TimersScreen(
 ) {
     LaunchedEffect(Unit) {
         screenController.updateConfig(
-            timersConfig(
+            timersScreenConfig(
                 onFabClick = {
                     screenController.performAction(viewModel.onFabClick())
                 }

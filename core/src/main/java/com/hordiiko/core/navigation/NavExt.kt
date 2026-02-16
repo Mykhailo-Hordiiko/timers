@@ -6,7 +6,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.hordiiko.core.screen.Screen
 
 @Composable
-fun NavController.currentRouteOrDefault(default: String = ""): String =
+fun NavController.currentRouteOrDefault(default: String): String =
     this.currentBackStackEntryAsState().value?.destination?.route ?: default
 
 fun NavController.navigateToRoot(screen: Screen) {

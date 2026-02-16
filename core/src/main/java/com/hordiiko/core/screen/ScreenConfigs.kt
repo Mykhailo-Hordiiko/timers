@@ -5,9 +5,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.Add
 import androidx.compose.material.icons.outlined.Done
-import androidx.compose.material.icons.outlined.InsertChart
-import androidx.compose.material.icons.outlined.Settings
-import androidx.compose.material.icons.outlined.Timer
 import com.hordiiko.core.R
 
 // region Common
@@ -28,36 +25,9 @@ private fun confirmButtonConfig(onClick: () -> Unit): TopAppBarButtonConfig =
 
 // endregion
 
-// region Navigation
-
-val navigationBarItemsConfig: List<NavigationBarItemConfig> =
-    listOf(
-        NavigationBarItemConfig(
-            icon = Icons.Outlined.Timer,
-            labelResId = R.string.screen_timers,
-            screen = Screen.Timers
-        ),
-        NavigationBarItemConfig(
-            icon = Icons.Outlined.InsertChart,
-            labelResId = R.string.screen_statistics,
-            screen = Screen.Statistics
-        ),
-        NavigationBarItemConfig(
-            icon = Icons.Outlined.Settings,
-            labelResId = R.string.screen_settings,
-            screen = Screen.Settings
-        )
-    )
-
-// endregion
-
 // region Root Screens
 
-val startScreen: Screen = Screen.Timers
-
-val startConfig: ScreenConfig = timersConfig()
-
-fun timersConfig(
+fun timersScreenConfig(
     onFabClick: () -> Unit = {}
 ): ScreenConfig =
     ScreenConfig(
@@ -72,7 +42,7 @@ fun timersConfig(
         isNavigationBarVisible = true
     )
 
-fun statisticsConfig(): ScreenConfig =
+fun statisticsScreenConfig(): ScreenConfig =
     ScreenConfig(
         topAppBar = TopAppBarConfig(
             headlineResId = R.string.screen_statistics
@@ -80,7 +50,7 @@ fun statisticsConfig(): ScreenConfig =
         isNavigationBarVisible = true
     )
 
-fun settingsConfig(): ScreenConfig =
+fun settingsScreenConfig(): ScreenConfig =
     ScreenConfig(
         topAppBar = TopAppBarConfig(
             headlineResId = R.string.screen_settings
@@ -92,7 +62,7 @@ fun settingsConfig(): ScreenConfig =
 
 // region Timer Create Screens
 
-private fun timerCreateConfig(
+private fun timerCreateScreenConfig(
     @StringRes headlineResId: Int,
     onBackButtonClick: () -> Unit = {},
     onConfirmButtonClick: () -> Unit = {}
@@ -106,41 +76,41 @@ private fun timerCreateConfig(
     )
 
 
-fun stopwatchCreateConfig(
+fun stopwatchCreateScreenConfig(
     onBackButtonClick: () -> Unit = {},
     onConfirmButtonClick: () -> Unit = {}
 ): ScreenConfig =
-    timerCreateConfig(
+    timerCreateScreenConfig(
         headlineResId = R.string.timer_new_stopwatch,
         onBackButtonClick = onBackButtonClick,
         onConfirmButtonClick = onConfirmButtonClick
     )
 
-fun countdownCreateConfig(
+fun countdownCreateScreenConfig(
     onBackButtonClick: () -> Unit = {},
     onConfirmButtonClick: () -> Unit = {}
 ): ScreenConfig =
-    timerCreateConfig(
+    timerCreateScreenConfig(
         headlineResId = R.string.timer_new_countdown,
         onBackButtonClick = onBackButtonClick,
         onConfirmButtonClick = onConfirmButtonClick
     )
 
-fun pomodoroCreateConfig(
+fun pomodoroCreateScreenConfig(
     onBackButtonClick: () -> Unit = {},
     onConfirmButtonClick: () -> Unit = {}
 ): ScreenConfig =
-    timerCreateConfig(
+    timerCreateScreenConfig(
         headlineResId = R.string.timer_new_pomodoro,
         onBackButtonClick = onBackButtonClick,
         onConfirmButtonClick = onConfirmButtonClick
     )
 
-fun tabataCreateConfig(
+fun tabataCreateScreenConfig(
     onBackButtonClick: () -> Unit = {},
     onConfirmButtonClick: () -> Unit = {}
 ): ScreenConfig =
-    timerCreateConfig(
+    timerCreateScreenConfig(
         headlineResId = R.string.timer_new_tabata,
         onBackButtonClick = onBackButtonClick,
         onConfirmButtonClick = onConfirmButtonClick

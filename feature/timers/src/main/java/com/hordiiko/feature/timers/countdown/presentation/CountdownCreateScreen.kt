@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hordiiko.core.screen.ScreenController
-import com.hordiiko.core.screen.countdownCreateConfig
+import com.hordiiko.core.screen.countdownCreateScreenConfig
 
 @Composable
 internal fun CountdownCreateScreen(
@@ -13,7 +13,7 @@ internal fun CountdownCreateScreen(
 ) {
     LaunchedEffect(Unit) {
         screenController.updateConfig(
-            countdownCreateConfig(
+            countdownCreateScreenConfig(
                 onBackButtonClick = {
                     screenController.performAction(viewModel.onBackButtonClick())
                 },

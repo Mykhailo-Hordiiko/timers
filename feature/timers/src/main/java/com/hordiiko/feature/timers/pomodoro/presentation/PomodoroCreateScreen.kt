@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hordiiko.core.screen.ScreenController
-import com.hordiiko.core.screen.pomodoroCreateConfig
+import com.hordiiko.core.screen.pomodoroCreateScreenConfig
 
 @Composable
 internal fun PomodoroCreateScreen(
@@ -13,7 +13,7 @@ internal fun PomodoroCreateScreen(
 ) {
     LaunchedEffect(Unit) {
         screenController.updateConfig(
-            pomodoroCreateConfig(
+            pomodoroCreateScreenConfig(
                 onBackButtonClick = {
                     screenController.performAction(viewModel.onBackButtonClick())
                 },

@@ -10,12 +10,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.hordiiko.core.R
 import com.hordiiko.core.screen.ScreenController
-import com.hordiiko.core.screen.statisticsConfig
+import com.hordiiko.core.screen.statisticsScreenConfig
 
 @Composable
 internal fun StatisticsScreen(screenController: ScreenController) {
     LaunchedEffect(Unit) {
-        screenController.updateConfig(statisticsConfig())
+        screenController.updateConfig(statisticsScreenConfig())
     }
 
     Box(

@@ -1,4 +1,4 @@
-package com.hordiiko.timers.presentation
+package com.hordiiko.app.presentation
 
 import android.app.Activity
 import android.view.View
@@ -17,6 +17,10 @@ import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBarsPadding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.InsertChart
+import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.Timer
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -37,24 +41,26 @@ import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.hordiiko.app.navigation.MainNavHost
+import com.hordiiko.core.R
 import com.hordiiko.core.navigation.currentRouteOrDefault
 import com.hordiiko.core.navigation.navigateToRoot
 import com.hordiiko.core.screen.FabConfig
 import com.hordiiko.core.screen.NavigationBarItemConfig
+import com.hordiiko.core.screen.Screen
 import com.hordiiko.core.screen.ScreenConfig
 import com.hordiiko.core.screen.ScreenController
 import com.hordiiko.core.screen.TopAppBarButtonConfig
 import com.hordiiko.core.screen.TopAppBarConfig
-import com.hordiiko.core.screen.navigationBarItemsConfig
-import com.hordiiko.core.screen.startScreen
-import com.hordiiko.timers.navigation.AppNavGraph
 
 // region Screen
 
 @Composable
-internal fun MainScreen(
-    viewModel: MainViewModel = viewModel()
-) {
+internal fun MainScreen(startScreen: Screen, startScreenConfig: ScreenConfig) {
+    val viewModel: MainViewModel = viewModel(
+        factory = MainViewModelFactory(startScreenConfig)
+    )
+
     val navController: NavHostController = rememberNavController()
     val screenController: ScreenController = remember(navController) {
         MainScreenController(
@@ -93,9 +99,10 @@ internal fun MainScreen(
                 .fillMaxSize()
                 .padding(innerPadding)
         ) {
-            AppNavGraph(
+            MainNavHost(
                 navController = navController,
-                screenController = screenController
+                screenController = screenController,
+                startScreen = startScreen
             )
         }
     }
@@ -210,6 +217,25 @@ private fun MainFab(config: FabConfig?) {
 // endregion
 
 // region NavigationBar
+
+private val navigationBarItemsConfig: List<NavigationBarItemConfig> =
+    listOf(
+        NavigationBarItemConfig(
+            icon = Icons.Outlined.Timer,
+            labelResId = R.string.screen_timers,
+            screen = Screen.Timers
+        ),
+        NavigationBarItemConfig(
+            icon = Icons.Outlined.InsertChart,
+            labelResId = R.string.screen_statistics,
+            screen = Screen.Statistics
+        ),
+        NavigationBarItemConfig(
+            icon = Icons.Outlined.Settings,
+            labelResId = R.string.screen_settings,
+            screen = Screen.Settings
+        )
+    )
 
 @Composable
 private fun MainNavigationBar(

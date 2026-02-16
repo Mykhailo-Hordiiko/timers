@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.hordiiko.timers"
+    namespace = "com.hordiiko.app"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.hordiiko.timers"
+        applicationId = "com.hordiiko.app"
         minSdk = 26
         targetSdk = 35
         versionCode = 1

@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hordiiko.core.screen.ScreenController
-import com.hordiiko.core.screen.stopwatchCreateConfig
+import com.hordiiko.core.screen.stopwatchCreateScreenConfig
 
 @Composable
 internal fun StopwatchCreateScreen(
@@ -13,7 +13,7 @@ internal fun StopwatchCreateScreen(
 ) {
     LaunchedEffect(Unit) {
         screenController.updateConfig(
-            stopwatchCreateConfig(
+            stopwatchCreateScreenConfig(
                 onBackButtonClick = {
                     screenController.performAction(viewModel.onBackButtonClick())
                 },

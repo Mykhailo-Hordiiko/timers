@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.hordiiko.core.screen.ScreenController
-import com.hordiiko.core.screen.tabataCreateConfig
+import com.hordiiko.core.screen.tabataCreateScreenConfig
 
 @Composable
 internal fun TabataCreateScreen(
@@ -13,7 +13,7 @@ internal fun TabataCreateScreen(
 ) {
     LaunchedEffect(Unit) {
         screenController.updateConfig(
-            tabataCreateConfig(
+            tabataCreateScreenConfig(
                 onBackButtonClick = {
                     screenController.performAction(viewModel.onBackButtonClick())
                 },
