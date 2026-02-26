@@ -19,9 +19,9 @@ class TimersViewModel : ViewModel() {
     }
 
     internal fun onFabClick(): ScreenAction = when (timerType) {
-        TimerType.Stopwatch -> ScreenAction.OpenStopwatchCreate
-        TimerType.Countdown -> ScreenAction.OpenCountdownCreate
-        TimerType.Pomodoro -> ScreenAction.OpenPomodoroCreate
-        TimerType.Tabata -> ScreenAction.OpenTabataCreate
+        TimerType.Stopwatch -> ScreenAction.TimerCreate.Stopwatch
+        TimerType.Countdown -> ScreenAction.TimerCreate.Countdown
+        TimerType.Pomodoro -> ScreenAction.TimerCreate.Pomodoro
+        TimerType.Tabata -> ScreenAction.TimerCreate.Tabata
     }
 }

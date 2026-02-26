@@ -42,9 +42,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.hordiiko.app.navigation.MainNavHost
+import com.hordiiko.app.navigation.MainNavigator
+import com.hordiiko.app.navigation.Navigator
+import com.hordiiko.app.navigation.currentRouteOrDefault
 import com.hordiiko.core.R
-import com.hordiiko.core.navigation.currentRouteOrDefault
-import com.hordiiko.core.navigation.navigateToRoot
 import com.hordiiko.core.screen.FabConfig
 import com.hordiiko.core.screen.NavigationBarItemConfig
 import com.hordiiko.core.screen.Screen
@@ -56,21 +57,19 @@ import com.hordiiko.core.screen.TopAppBarConfig
 // region Screen
 
 @Composable
-internal fun MainScreen(startScreen: Screen, startScreenConfig: ScreenConfig) {
-    val viewModel: MainViewModel = viewModel(
-        factory = MainViewModelFactory(startScreenConfig)
-    )
-
+internal fun MainScreen(
+    viewModel: MainViewModel = viewModel()
+) {
     val navController: NavHostController = rememberNavController()
-    val screenController: ScreenController = remember(navController) {
-        MainScreenController(
-            navController = navController,
-            updateScreenConfig = viewModel::updateScreenConfig
-        )
+    val navigator: Navigator = remember(navController) { MainNavigator(navController) }
+
+    val screenController: ScreenController = remember(navigator) {
+        MainScreenController(navigator, viewModel::updateScreenConfig)
     }
 
-    val currentRoute: String = navController.currentRouteOrDefault(startScreen.route)
+    val startScreen: Screen = viewModel.startScreen
     val screenConfig: ScreenConfig = viewModel.screenConfig
+    val currentRoute: String = navController.currentRouteOrDefault(startScreen)
 
     MainStatusBarAppearance()
 
@@ -89,7 +88,7 @@ internal fun MainScreen(startScreen: Screen, startScreenConfig: ScreenConfig) {
             MainNavigationBar(
                 isVisible = screenConfig.isNavigationBarVisible,
                 currentRoute = currentRoute,
-                navController = navController
+                navigator = navigator
             )
         }
     ) { innerPadding ->
@@ -241,7 +240,7 @@ private val navigationBarItemsConfig: List<NavigationBarItemConfig> =
 private fun MainNavigationBar(
     isVisible: Boolean,
     currentRoute: String,
-    navController: NavHostController
+    navigator: Navigator
 ) {
     AnimatedVisibility(
         visible = isVisible,
@@ -257,7 +256,7 @@ private fun MainNavigationBar(
                 MainNavigationBarItem(
                     config = config,
                     currentRoute = currentRoute,
-                    navController = navController
+                    navigator = navigator
                 )
             }
         }
@@ -268,7 +267,7 @@ private fun MainNavigationBar(
 private fun RowScope.MainNavigationBarItem(
     config: NavigationBarItemConfig,
     currentRoute: String,
-    navController: NavHostController
+    navigator: Navigator
 ) {
     NavigationBarItem(
         icon = {
@@ -285,7 +284,7 @@ private fun RowScope.MainNavigationBarItem(
         selected = config.screen.route == currentRoute,
         onClick = {
             if (config.screen.route != currentRoute) {
-                navController.navigateToRoot(config.screen)
+                navigator.navigateToRoot(config.screen)
             }
         }
     )

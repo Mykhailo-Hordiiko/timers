@@ -1,14 +1,14 @@
 package com.hordiiko.app.presentation
 
-import androidx.navigation.NavHostController
-import com.hordiiko.core.navigation.navigateTo
+import com.hordiiko.app.navigation.Navigator
 import com.hordiiko.core.screen.Screen
 import com.hordiiko.core.screen.ScreenAction
+import com.hordiiko.core.screen.ScreenAction.TimerCreate
 import com.hordiiko.core.screen.ScreenConfig
 import com.hordiiko.core.screen.ScreenController
 
-class MainScreenController(
-    private val navController: NavHostController,
+internal class MainScreenController(
+    private val navigator: Navigator,
     private val updateScreenConfig: (ScreenConfig) -> Unit
 ) : ScreenController {
 
@@ -18,20 +18,20 @@ class MainScreenController(
 
     override fun performAction(action: ScreenAction) {
         when (action) {
-            ScreenAction.GoBack ->
-                navController.popBackStack()
-
-            ScreenAction.OpenStopwatchCreate ->
-                navController.navigateTo(Screen.StopwatchCreate)
-
-            ScreenAction.OpenCountdownCreate ->
-                navController.navigateTo(Screen.CountdownCreate)
-
-            ScreenAction.OpenPomodoroCreate ->
-                navController.navigateTo(Screen.PomodoroCreate)
-
-            ScreenAction.OpenTabataCreate ->
-                navController.navigateTo(Screen.TabataCreate)
+            ScreenAction.GoBack -> navigator.goBack()
+            is TimerCreate -> performAction(action)
         }
+    }
+
+    private fun performAction(action: TimerCreate) {
+        val screen: Screen =
+            when (action) {
+                TimerCreate.Stopwatch -> Screen.StopwatchCreate
+                TimerCreate.Countdown -> Screen.CountdownCreate
+                TimerCreate.Pomodoro -> Screen.PomodoroCreate
+                TimerCreate.Tabata -> Screen.TabataCreate
+            }
+
+        navigator.navigateTo(screen)
     }
 }
