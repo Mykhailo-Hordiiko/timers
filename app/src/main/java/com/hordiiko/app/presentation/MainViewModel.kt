@@ -8,7 +8,7 @@ import com.hordiiko.core.screen.Screen
 import com.hordiiko.core.screen.ScreenConfig
 import com.hordiiko.core.screen.timersScreenConfig
 
-class MainViewModel : ViewModel() {
+internal class MainViewModel : ViewModel() {
 
     internal val startScreen: Screen = Screen.Timers
     private val startScreenConfig: ScreenConfig = timersScreenConfig()

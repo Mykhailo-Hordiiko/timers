@@ -1,7 +1,6 @@
 package com.hordiiko.app.presentation
 
 import com.hordiiko.app.navigation.Navigator
-import com.hordiiko.core.screen.Screen
 import com.hordiiko.core.screen.ScreenAction
 import com.hordiiko.core.screen.ScreenAction.TimerCreate
 import com.hordiiko.core.screen.ScreenConfig
@@ -19,19 +18,7 @@ internal class MainScreenController(
     override fun performAction(action: ScreenAction) {
         when (action) {
             ScreenAction.GoBack -> navigator.goBack()
-            is TimerCreate -> performAction(action)
+            is TimerCreate -> navigator.navigateTo(action.screen)
         }
-    }
-
-    private fun performAction(action: TimerCreate) {
-        val screen: Screen =
-            when (action) {
-                TimerCreate.Stopwatch -> Screen.StopwatchCreate
-                TimerCreate.Countdown -> Screen.CountdownCreate
-                TimerCreate.Pomodoro -> Screen.PomodoroCreate
-                TimerCreate.Tabata -> Screen.TabataCreate
-            }
-
-        navigator.navigateTo(screen)
     }
 }

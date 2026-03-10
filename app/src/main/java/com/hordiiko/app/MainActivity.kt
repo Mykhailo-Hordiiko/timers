@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import com.hordiiko.app.presentation.MainScreen
 import com.hordiiko.core.ui.theme.AppTheme
 
-class MainActivity : ComponentActivity() {
+internal class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

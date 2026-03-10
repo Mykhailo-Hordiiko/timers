@@ -1,8 +1,5 @@
 package com.hordiiko.app.presentation
 
-import android.app.Activity
-import android.view.View
-import android.view.Window
 import androidx.annotation.StringRes
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.fadeIn
@@ -11,12 +8,9 @@ import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.InsertChart
 import androidx.compose.material.icons.outlined.Settings
@@ -31,13 +25,10 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -71,19 +62,9 @@ internal fun MainScreen(
     val screenConfig: ScreenConfig = viewModel.screenConfig
     val currentRoute: String = navController.currentRouteOrDefault(startScreen)
 
-    MainStatusBarAppearance()
-
     Scaffold(
-        topBar = {
-            MainTopAppBar(
-                config = screenConfig.topAppBar
-            )
-        },
-        floatingActionButton = {
-            MainFab(
-                config = screenConfig.fab
-            )
-        },
+        topBar = { MainTopAppBar(screenConfig.topAppBar) },
+        floatingActionButton = { MainFab(screenConfig.fab) },
         bottomBar = {
             MainNavigationBar(
                 isVisible = screenConfig.isNavigationBarVisible,
@@ -92,35 +73,14 @@ internal fun MainScreen(
             )
         }
     ) { innerPadding ->
-
-        Box(
+        MainNavHost(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
-        ) {
-            MainNavHost(
-                navController = navController,
-                screenController = screenController,
-                startScreen = startScreen
-            )
-        }
-    }
-}
-
-// endregion
-
-// region StatusBar
-
-@Composable
-private fun MainStatusBarAppearance(
-    isDarkTheme: Boolean = isSystemInDarkTheme()
-) {
-    val view: View = LocalView.current
-    val activity: Activity = view.context as? Activity ?: return
-    val window: Window = activity.window
-
-    SideEffect {
-        WindowInsetsControllerCompat(window, view).isAppearanceLightStatusBars = !isDarkTheme
+                .padding(innerPadding),
+            startScreen = startScreen,
+            navController = navController,
+            screenController = screenController
+        )
     }
 }
 
@@ -131,37 +91,17 @@ private fun MainStatusBarAppearance(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun MainTopAppBar(config: TopAppBarConfig?) {
-    Box(
-        modifier = Modifier.statusBarsPadding()
+    AnimatedVisibility(
+        visible = config != null,
+        enter = slideInVertically { -it } + fadeIn(),
+        exit = slideOutVertically { -it } + fadeOut()
     ) {
-        AnimatedVisibility(
-            visible = config != null,
-            enter = slideInVertically(
-                initialOffsetY = { -it }
-            ) + fadeIn(),
-            exit = slideOutVertically(
-                targetOffsetY = { -it }
-            ) + fadeOut()
-        ) {
-            config?.let {
-                TopAppBar(
-                    navigationIcon = {
-                        MainTopAppBarButton(
-                            config = it.leadingButton
-                        )
-                    },
-                    title = {
-                        MainTopAppBarTitle(
-                            resId = it.headlineResId
-                        )
-                    },
-                    actions = {
-                        MainTopAppBarButton(
-                            config = it.trailingButton
-                        )
-                    }
-                )
-            }
+        config?.let {
+            TopAppBar(
+                navigationIcon = { MainTopAppBarButton(it.leadingButton) },
+                title = { MainTopAppBarTitle(it.headlineResId) },
+                actions = { MainTopAppBarButton(it.trailingButton) }
+            )
         }
     }
 }
@@ -244,12 +184,8 @@ private fun MainNavigationBar(
 ) {
     AnimatedVisibility(
         visible = isVisible,
-        enter = slideInVertically(
-            initialOffsetY = { it }
-        ) + fadeIn(),
-        exit = slideOutVertically(
-            targetOffsetY = { it }
-        ) + fadeOut()
+        enter = slideInVertically { it } + fadeIn(),
+        exit = slideOutVertically { it } + fadeOut()
     ) {
         NavigationBar {
             navigationBarItemsConfig.forEach { config ->

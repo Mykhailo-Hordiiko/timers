@@ -1,6 +1,7 @@
 package com.hordiiko.app.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import com.hordiiko.core.screen.Screen
@@ -11,13 +12,15 @@ import com.hordiiko.feature.timers.navigation.timersNavGraph
 
 @Composable
 internal fun MainNavHost(
+    modifier: Modifier,
+    startScreen: Screen,
     navController: NavHostController,
-    screenController: ScreenController,
-    startScreen: Screen
+    screenController: ScreenController
 ) {
     NavHost(
-        navController = navController,
-        startDestination = startScreen.route
+        modifier = modifier,
+        startDestination = startScreen.route,
+        navController = navController
     ) {
         timersNavGraph(screenController)
         statisticsNavGraph(screenController)

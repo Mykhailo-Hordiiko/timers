@@ -18,14 +18,14 @@ data class TopAppBarConfig(
 
 data class TopAppBarButtonConfig(
     val icon: ImageVector,
-    val contentDescriptionResId: Int,
+    @StringRes val contentDescriptionResId: Int,
     val onClick: () -> Unit
 )
 
 
 data class FabConfig(
     val icon: ImageVector,
-    val contentDescriptionResId: Int,
+    @StringRes val contentDescriptionResId: Int,
     val onClick: () -> Unit
 )
 
